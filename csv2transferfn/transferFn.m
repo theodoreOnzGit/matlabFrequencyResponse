@@ -52,7 +52,8 @@ data_mag=abs(data_mag);
 %% second let's plot out the bode plots
 [tf_mag,tf_phase,tf_freq]=bode(data.sys);
 tf_mag=squeeze(tf_mag);
-tf_freq=squeeze(tf_freq);
+% remember, we need to convert radians per sec to Hz
+tf_freq=squeeze(tf_freq*1/2/pi);
 
 tfmagdB=20*log10(tf_mag);
 datamagdB=20*log10(data_mag);
@@ -88,7 +89,9 @@ data_phase=angle(data_phase);
 %% second let's plot out the bode plots
 [tf_mag,tf_phase,tf_freq]=bode(data.sys);
 tf_phase=squeeze(tf_phase);
-tf_freq=squeeze(tf_freq);
+% remember, we need to convert radians per sec to Hz
+
+tf_freq=squeeze(tf_freq/2/pi);
 
 plot(data_freq,data_phase,'*')
 hold on

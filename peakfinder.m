@@ -15,8 +15,8 @@ outputdB=10*log10(abs(output));
 
 % decibels here will be used as the threshold for the peak prominence
 
-thresholdInput=max(abs(inputdB))/3;
-thresholdOutput=max(abs(outputdB))/3;
+thresholdInput=10*log10(max(abs(inputdB)))/1.2;
+thresholdOutput=10*log10(max(abs(outputdB)))/1.2;
 
 
 
