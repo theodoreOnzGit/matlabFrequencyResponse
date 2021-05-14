@@ -15,7 +15,7 @@ clear
 % both are done in myFFT function
 
 
-freqData=myFFT('data freq2e-3.csv');
+freqData=myFFT('binaryNoiseSignal.csv');
 
 
 %% Thirdly, plot gain and phase of the FFTs vs frequency

@@ -15,8 +15,8 @@ outputdB=10*log10(abs(output));
 
 % decibels here will be used as the threshold for the peak prominence
 
-thresholdInput=10*log10(max(abs(inputdB)))/1.2;
-thresholdOutput=10*log10(max(abs(outputdB)))/1.2;
+thresholdInput=10*log10((max(abs(inputdB))));
+thresholdOutput=10*log10((max(abs(outputdB))));
 
 
 
@@ -33,7 +33,6 @@ thresholdOutput=10*log10(max(abs(outputdB)))/1.2;
 
 [pks,inputPeakIndex]=findpeaks(inputdB,'MinPeakProminence',thresholdInput);
 clear pks
-
 
 % this next part extracts the peaks at the various frequencies according to ONLY the input peaks
 inputPeaks=elementSearch(input,inputPeakIndex);
