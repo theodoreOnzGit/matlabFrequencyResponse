@@ -15,7 +15,7 @@ clear
 % both are done in myFFT function
 
 
-freqData=myFFT('filteredNoise_vs_noise.csv');
+freqData=myFFT('frequencyResponse_PRBS_data_amp2.csv');
 
 
 %% Thirdly, plot gain and phase of the FFTs vs frequency
@@ -33,7 +33,7 @@ gainAndPhase=gainAndPhase(freqData);
 % but i'll not be doing the second part so much, cos that will just include
 % dividing everything by the gain of the input frequency
 
-peakData=peakfinder(freqData);
+peakData=linearPeakFinder(freqData);
 
 %% fourth put in gain and phase data into correct matlab form for the principal frequency
 

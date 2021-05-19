@@ -10,14 +10,14 @@ clf
 
 
 
-frData=csv2idfrd('frequenciesAndComplexGain.csv')
+frData=csv2idfrd('testData.csv','listofFreqs.csv')
 
 %% secondly use the tfest function to generate a transfer function
 
 %https://www.mathworks.com/help/ident/ref/tfest.html
 
 % decide your delay time, number of poles and number of zeroes here
-delayTime=0;%1/0.0134; % this is in secconds btw, delay time is residence time
+delayTime=0; %delay time is sometimes residence time
 nPoles=2;
 nZeroes=nPoles-1;
 
@@ -104,7 +104,7 @@ hold off
 end
 %% below is the csv2idfrd function
 
-function [fr_data]=csv2idfrd(csvFile)
+function [fr_data]=csv2idfrd(freqRespDataCSV,freqArrayCSV)
 %% this function takes multiple bode plots and creates a idfrd object which can be used to estimate
 % a transfer function
 
@@ -118,12 +118,13 @@ function [fr_data]=csv2idfrd(csvFile)
 % probably will want to store the testData into a csv file
 
 % let's say the test Data comes from testData.csv
-bodeArray=csv2array(csvFile);
+bodeArray=csv2array_2col(freqRespDataCSV);
 
-% assume for simplicity that all sampling frequency is 2Hz
-% and sampling time is 0.5 Hz
-fs=2;
-Ts=1/fs;
+%% now i load in my sampling frequency (estimated)
+maxFreqArray=csv2array_1col(freqArrayCSV);
+fs = max(maxFreqArray);
+Ts = 1/fs;
+
 
 % note that sampling time here is just to help eliminate any data point
 % with frequency above nyquist frequency
@@ -141,7 +142,7 @@ fr_data=idfrd(response,freq,Ts,'FrequencyUnit','Hz');
 end
 
 
-function [array] = csv2array(csv)
+function [array] = csv2array_2col(csv)
 
 % first let's import the table, using readTable, 
 % https://www.mathworks.com/matlabcentral/answers/72545-how-to-import-csv-file-in-matlab
@@ -161,4 +162,14 @@ freq=tableData(:,1);
 freq=table2array(freq);
 array=[freq,response];
 
+end
+
+function [array] = csv2array_1col(csv)
+
+
+tableData = readtable(csv,'delimiter',',');
+
+
+freq=tableData(:,1);
+array=table2array(freq);
 end
