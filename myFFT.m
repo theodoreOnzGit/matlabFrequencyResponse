@@ -60,7 +60,7 @@ function [freqData] = normalisedFFT(data)
 % first lets get the sampling frequency
 n=length(data(:,1)); %no. of data points
 deltaT=data(n,1)-data(1,1); % time interval from first to last data point
-fs=n/deltaT; % frequency resolution (note for video)
+fs=n/deltaT; % sampling frequency
 
 % next let's get a frequency array transposed in column form 
 f=(0:n-1)*fs/n;
